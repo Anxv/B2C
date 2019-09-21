@@ -1,0 +1,117 @@
+{% extends "../common/base.html" %}
+{% block cssjs %}
+{% include "../common/cssjs.html"%}
+<link rel="stylesheet" href="/public/index/css/swiper.min.css">
+<script src="public/index/js/swiper.min.js"></script>
+{% endblock %}
+
+<!-- content -->
+{% block content %}
+<div class="basic_info ">
+    <div class="left fl ">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {%for url in goods.relate_gallerys%}
+                <div class="swiper-slide">
+                    <img src="{{url}}">
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="right fl">
+        <div class="title">{{goods.goods_title}}</div>
+        <div class="subtitle">{{goods.goods_brief}}</div>
+        <div class="price">{{goods.price_selling}} 元</div>
+
+        <!-- {%if relationGoods.length>0 %}
+        <div class="ft20 ml20 mt20">选择版本</div>
+        <div class="xzbb ml20 mt10 clearfix">
+            {%for item in relationGoods %}
+            <div class="banben fl {%if goods._id.toString()==item._id.toString() %} active {%endif%}">
+                <a href=" ">
+                    <span>{{itme.goods_version}}</span>
+                    <span>{{item.shop_price}}元</span>
+                </a>
+            </div>
+            {%endfor%}
+        </div>
+        {%endif%} -->
+
+        <!-- {%if goodsColor.length>0 %}
+        <div class="ft20 ml20 mt20 clear">选择颜色</div>
+        <div class="xzbb ml20 mt10 clearfix" id="color_list">
+            {%for item in goodsColor %}
+            <div class="banben fl  {%if i==0 %}active {%endif%}" color_id="{{item._id}}">
+                <a>
+                    <span class="yuandian" style="background:{{item.color_value}}"></span>
+                    <span class="yanse">{{item.color_name}}</span>
+                </a>
+            </div>
+            {%endfor%}
+        </div>
+        {%endif%} -->
+        <div class="placeordrer ml20 mt20">
+            <input class="addCart" type="button" name="addCart" id="addCart" value="加入购物车" goods_id="{{goods._id}}" />
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!-- 推荐商品 -->
+<div class="recomand_goods">
+    {% for rgoods in relate_goodss %}
+    <div class="item fl">
+        <div class="good_img">
+            <a href="/goodsinfo?id={{rgoods._id}}">
+                <img src="{{rgoods.goods_img}}">
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="clear"></div>
+</div>
+<!-- 详情介绍 -->
+<div class="detail">
+    <ul class="detail_list clearfix">
+        <li class="">详情描述</li>
+        <li class="">规格参数</li>
+        <li class="">用户评价</li>
+    </ul>
+    <div class="detail_info">
+        <div class="detail_info_item">
+            {{goods.goods_desc|safe}}
+        </div>
+        <div class="detail_info_item">
+            <ul>
+                {% for attr in goodsAttrs %}
+                <li class="row clearfix">
+                    <div class="span5">
+                        <h2>{{attr.attr_name}}</h2>
+                    </div>
+                    <div class="span15">
+                        {{attr.attr_value}}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="detail_info_item">
+            <ul class="comment_list">
+                {% for comment in comments%}
+                <li>
+                    <div>
+                        <img src="/public/index/images/1558749549014.jpg" width="60" height="60">
+                    </div>
+                    <p style="word-wrap:break-word;word-break:break-all;">{{comment.comment_content}}</p>
+                    <p class="eval-order-info">
+                        <span class="eval-time">{{helper.dateFormat(comment.comment_time)}}</span>
+                        <br>
+                        <span>{{goods.goods_title}}</span>
+                    </p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

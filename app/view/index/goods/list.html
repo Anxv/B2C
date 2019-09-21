@@ -1,0 +1,27 @@
+{% extends "../common/base.html" %}
+{% block cssjs %}
+{% include "../common/cssjs.html"%}
+{% endblock %}
+
+<!-- content -->
+{% block content %}
+<!-- 商品列表 -->
+<div class="category_item">
+        <div class="content">
+            {% for goods in goodss %}
+            <div class="item fl">
+                <div class="tag"><span style="background:#fff"></span></div>
+                <div class="good_img">
+                    <a href="/goodsdetail?_id={{goods._id}}">
+                        <img src="{{goods.goods_img}}">
+                    </a>
+                </div>
+                <div class="title"><a href="">{{goods.goods_title}}</a></div>
+                <div class="price">{{goods.price_selling}}元</div>
+                <div class="price pm">{{goods.price_market}}元</div>
+            </div>
+            {% endfor %}
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<link rel='stylesheet' href="/public/admin/css/base.css">
+<link rel='stylesheet' href="/public/admin/css/bootstrap.min.css">
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        增加广告
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive input-form">
+            <form action="/admin/advertise/doAdd?_csrf={{csrf}}" method="post" enctype="multipart/form-data">
+                <ul>
+                    <li> <span>分　　类:</span>
+                        <select name="ads_type" id="ads_type">
+                            <option value="1">网站</option>
+                            <option value="2">App</option>
+                            <option value="3">小程序</option>
+                        </select> </li>
+                    <li> <span>名　　称:</span> <input type="text" name="ads_title" /></li>
+                    <li> <span>跳转地址:</span> <input type="text" name="ads_link" /></li>
+                    <li> <span>广 告 图:</span> <input type="file" name="ads_img" /></li>
+                    <li> <span>位　　置:</span>
+                        <select name="ads_position" id="ads_position">
+                            <option value="1">上</option>
+                            <option value="2">中</option>
+                            <option value="3">左</option>
+                            <option value="4">右</option>
+                            <option value="5">下</option>
+                        </select>
+                    </li>
+                    <li> <span>排　　序:</span> <input type="text" name="data_sort" value="50" /></li>
+                    <li> <span>状　　态:</span>
+                        <input type="radio" name="ads_status" value="1" id="a" checked /> <label for="a">显示</label>
+                        <input type="radio" name="ads_status" value="0" id="b" /> <label for="b">隐藏</label> 　
+                    </li>
+                    <li>
+                        <br />
+                        <button type="submit" class="btn btn-default">提交</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>

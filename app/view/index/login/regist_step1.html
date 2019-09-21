@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/public/admin/css/login.css">
+  <script src="/public/index/js/jquery.js"></script>
+</head>
+
+<body>
+  <div class="regist">
+    <!-- <div class="logo">
+              < img src="/public/default/image/logo.png" alt="BK-SHOP商城">
+            </div> -->
+    <div class="regist_top">
+      <h2>注册BK-SHOP账户</h2>
+    </div>
+    <div class="regist_main center">
+      <input class="form_input" type="text" name="phone" id="phone" placeholder="请填写正确的手机号" />
+      <div class="verifycode">
+        <input type="text" id="identify_code" name="identify_code" placeholder="请输入验证码" />
+        <img src="/verify" title="看不清？点击刷新" onclick="javascript:this.src='/verify?mt='+Math.random()">
+      </div>
+      <div class="regist_submit">
+        <button class="submit" id="registerButton">立即注册</button>
+      </div>
+      <br>
+      <br>
+      <div class="privacy_box">
+        <div class="msg">
+          <label class="n_checked now select-privacy">
+            <input type="checkbox" id="isAgree" /> 同意并愿意遵守 BK-SHOP 开发项目协议
+            <a href=" " class="inspect_link " title="用户协议" target="_blank">用户协议</a>和
+            <a href="/" class="inspect_link privacy_link" title=" 隐私政策 " target="_blank"> 隐私政策 </a>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  $(function () {
+    $("#registerButton").click(function (e) {
+      var phone = $('#phone').val();
+      var identify_code = $('#identify_code').val();
+      var isArgee = $('#isAgree').prop("checked");
+
+      var reg = /^1(3|4|5|6|7|8|9)\d{9}$/;
+      if (!(reg.test(phone))) {
+        alert("手机号码有误，请重填");
+        return false;
+      }
+      if (identify_code.length<4) {
+        alert('验证码4位')
+        return false;
+      }
+
+      if (!isArgee){
+        alert('请同意条款');
+        return false;
+      }
+
+      $.get('/login/phoneCode',{phone:phone,identify_code:identify_code},function (response) {
+          if (response.flag == true) {
+            location.href = '/register/step2?sign='+ response.sign + '&identify_code='+ identify_code;
+          }else{
+            alert(response.msg);
+          }
+      })
+    })
+  })
+</script>
+
+</html>

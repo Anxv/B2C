@@ -1,0 +1,66 @@
+<link rel='stylesheet' href="/public/admin/css/base.css">
+<link rel='stylesheet' href="/public/admin/css/bootstrap.min.css">
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="th">
+                        <th class="text-center">名称</th>
+                        <th class="text-center">分类</th>
+                        <th class="text-center">图片</th>
+                        <th class="text-center">跳转地址</th>
+                        <th class="text-center">位置</th>
+                        <th class="text-center">排序</th>
+                        <th class="text-center">状态</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for advertise in advertises %}
+                    <tr>
+                        <td>{{advertise.ads_title}}</td>
+                        <td>
+                            {% if advertise.ads_type == 1 %}
+                            网站
+                            {% elif advertise.ads_type == 2 %}
+                            App
+                            {% else %}
+                            小程序
+                            {% endif %}
+                        </td>
+                        <td><img class="pic" src="{{helper.url200(advertise.ads_img)}}"
+                                style="width: 30px; height: 20px;"></td>
+                        <td>{{advertise.ads_link}}</td>
+                        <td>
+                            {% if advertise.ads_position == 1 %}
+                            上
+                            {% elif advertise.ads_position == 2 %}
+                            中
+                            {% elif advertise.ads_position == 3 %}
+                            左
+                            {% elif advertise.ads_position == 4 %}
+                            右
+                            {% else %}
+                            下
+                            {% endif %}
+                        </td>
+                        <td>{{advertise.data_sort}}</td>
+                        <td>
+                            {% if advertise.ads_status == 1 %}
+                            <span class="glyphicon glyphicon-ok icon-color-green"></span>
+                            {% else %}
+                            <span class="glyphicon glyphicon-remove icon-color-red"></span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center text">　
+                            <a href="/admin/advertise/edit?_id={{advertise._id}}">修改</a>　
+                            <a href="/admin/advertise/delete?_id={{advertise._id}}">删除</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

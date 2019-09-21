@@ -1,0 +1,17 @@
+{% extends "../common/base.html" %}
+{% block cssjs %}
+{% include "../common/cssjs.html"%}
+{% endblock %}
+
+<!-- content -->
+{% block content %}
+<div class="article">
+    <div class="title">
+        {{article.article_title}}
+    </div>
+    <div class="line"></div>
+    <div>
+        {{article.article_content | safe }}
+    </div>
+</div>
+{% endblock %}
