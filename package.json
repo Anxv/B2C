@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "^12.0.10",
-    "egg-bin": "^4.13.0"
+    "egg-bin": "^5.9.0"
   },
   "description": ""
 }
